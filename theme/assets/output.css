@@ -1949,6 +1949,26 @@
   }
 }
 @layer utilities {
+  #scrollable-collection .products {
+    scrollbar-width: thin;
+    scrollbar-color: #000 #DDD6D7;
+  }
+  #scrollable-collection .products::-webkit-scrollbar {
+    width: 8px;
+    height: 4px;
+  }
+  #scrollable-collection .products::-webkit-scrollbar-thumb {
+    background-color: #000;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  #scrollable-collection .products::-webkit-scrollbar-thumb:hover {
+    background: #DDD6D7;
+  }
+  #scrollable-collection .products::-webkit-scrollbar-track {
+    background: #DDD6D7;
+    border-radius: 4px;
+  }
   #scrollable-collection .product:nth-child(n+5) {
     display: none;
   }
@@ -1956,11 +1976,11 @@
     display: block;
   }
   @media (min-width: 1024px) {
-    #scrollable-collection .product, #scrollable-collection .product:nth-child(n+5) {
-      display: block;
-    }
     #scrollable-collection .products {
       margin-left: calc((100% - 120rem) / 2);
+    }
+    #scrollable-collection .product, #scrollable-collection .product:nth-child(n+5) {
+      display: block;
     }
   }
 }
