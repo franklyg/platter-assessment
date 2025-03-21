@@ -1,0 +1,91 @@
+
+{% liquid  
+    assign collection_products = collections[section.settings.collection].products
+    assign collection_title = collections[section.settings.collection].title
+%}
+
+{%  capture collection %} 
+    {% for product in collection_products %}
+        <a href="{{ product.url }}" class="product lg:block col-span-1 lg:min-w-[355px]">
+            <div class="product-image w-full relative">
+                <div class="relative pt-[100%] lg:pt-0 lg:h-[355px] rounded-xl overflow-hidden group">                    
+                    {{ product.featured_image | image_url: width: 355 | image_tag: class: 'image-main w-full h-full absolute object-cover object-center top-0 left-0 z-20 transition-opacity duration-300 group-hover:opacity-0', loading: 'lazy', alt: product.title }}
+                    {{ product.images[1] | image_url: width: 355 | image_tag: class: 'image-hover w-full h-full absolute object-cover object-center top-0 left-0 z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100', loading: 'lazy', alt: product.title }}
+                </div>
+                <div class="absolute top-0 left-0 p-2 text-[10px] z-20 flex justify-between w-full">
+                    {% if product.tags contains 'Best seller' %}
+                        <div class="bg-white text-black border rounded-full py-1 px-2">
+                            BEST SELLER
+                        </div>
+                    {% endif %}
+                    {% assign discount = product.compare_at_price | minus: product.price %}
+                    {% assign discount_percentage = discount | divided_by: product.compare_at_price | times: 100 %}
+                    <div class="bg-green-800 text-white border rounded-full py-1 px-2">
+                        SALE {{ discount_percentage | round }}%
+                    </div>
+                </div>
+            </div>
+            <div class="product-information">
+                <h3 class="text-lg">{{ product.title }}</h3>
+                <div class="product-information--reviews flex justify-start items-center gap-1">
+                    <div class="product-information--reviews-stars flex justify-center gap-1">
+                        <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
+                        <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
+                        <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
+                        <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
+                        <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
+                    </div>
+                    <p class="text-xs">1,234 Reviews</p>
+                </div>
+                <p class="text-base">{{ product.price | money }}</p>
+            </div>
+        </a>
+    {% endfor %}
+{% endcapture %}
+
+<section id="scrollable-collection">
+    <div class="pt-20 pb-28 px-6 lg:px-0">
+        <div class="max-w-[120rem] m-auto flex justify-center items-center lg:justify-between">
+            {% if section.settings.title != blank %}
+                <h2 class="text-5xl">{{ section.settings.title }}</h2>
+            {% endif %}
+            {% if section.settings.collection_link %}
+                <a href="{{ collections[section.settings.collection].url }}" class="text-lg underline hidden lg:block">View all {{ collection_title }} </a>
+            {% endif %}
+        </div>
+        <div class="m-auto flex justify-end">
+            <div class="products w-full grid grid-cols-2 py-9 lg:flex gap-6 lg:overflow-x-auto">
+                {{ collection }}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Scrollable Collection",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "Featured Collection"
+            },
+            {
+                "type": "collection",
+                "id": "collection",
+                "label": "Collection"
+            },
+            {
+                "type": "checkbox",
+                "id": "collection_link",
+                "label": "Show link to collection"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Scrollable Collection"
+            }
+        ]
+    }
+{% endschema %}

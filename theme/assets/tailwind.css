@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer utilities {
+    #scrollable-collection .product:nth-child(n+5) {
+      display: none;
+    }
+    #scrollable-collection .product.active {
+      display: block;
+    }
+    @media (min-width: 1024px) {
+      #scrollable-collection .product,
+      #scrollable-collection .product:nth-child(n+5) {
+        display: block;
+      }
+      #scrollable-collection .products{
+          margin-left:calc((100% - 120rem) / 2);
+      }
+    }
+  }
