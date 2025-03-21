@@ -454,6 +454,9 @@
   .h-3 {
     height: calc(var(--spacing) * 3);
   }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
   .h-full {
     height: 100%;
   }
@@ -474,6 +477,9 @@
   }
   .w-3 {
     width: calc(var(--spacing) * 3);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
   }
   .w-full {
     width: 100%;
@@ -875,6 +881,12 @@
   }
   .gap-1 {
     gap: calc(var(--spacing) * 1);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
   }
   .gap-6 {
     gap: calc(var(--spacing) * 6);
@@ -1982,7 +1994,7 @@
 #scrollable-collection h3 {
   font-family: "Bebas Neue", sans-serif;
 }
-#scrollable-collection p, #scrollable-collection button {
+#scrollable-collection p, #scrollable-collection a, #scrollable-collection button {
   font-family: "Poppins", serif;
 }
 @layer utilities {

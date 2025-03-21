@@ -1,8 +1,8 @@
-
 {% liquid  
     assign collection_products = collections[section.settings.collection].products
     assign collection_title = collections[section.settings.collection].title
 %}
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const dropdownProducts = document.querySelector('.dropdown-products');
@@ -20,9 +20,8 @@
             showMore.textContent = isActive ? 'Show Less' : 'Show More';
         });
     });
-
-    
 </script>
+
 {%  capture collection %} 
     {% for product in collection_products limit: 4 %}
         <a href="{{ product.url }}" class="product lg:block col-span-1 lg:min-w-[355px]">
@@ -84,11 +83,11 @@
                     <h3 class="text-lg mb-2 leading-none">{{ product.title }}</h3>
                     <div class="product-information--reviews flex justify-start items-center gap-1 mb-4 leading-none">
                         <div class="product-information--reviews-stars flex justify-center gap-1">
-                            <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
-                            <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
-                            <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
-                            <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
-                            <img src="{{ 'star-01.png' |  asset_url }}" alt="star" class="w-3 h-3"/>
+                            <img src="{{ 'star-01.png' |  asset_url }}" alt="Star" class="w-3 h-3"/>
+                            <img src="{{ 'star-01.png' |  asset_url }}" alt="Star" class="w-3 h-3"/>
+                            <img src="{{ 'star-01.png' |  asset_url }}" alt="Star" class="w-3 h-3"/>
+                            <img src="{{ 'star-01.png' |  asset_url }}" alt="Star" class="w-3 h-3"/>
+                            <img src="{{ 'star-01.png' |  asset_url }}" alt="Star" class="w-3 h-3"/>
                         </div>
                         <p class="text-[12px]">1,234 Reviews</p>
                     </div>
@@ -99,6 +98,7 @@
     </div>
 {% endcapture %}
 
+{% comment %} Section template {% endcomment %}
 <section id="scrollable-collection">
     <div class="pt-20 pb-28 px-6 lg:px-0">
         <div class="max-w-[120rem] m-auto flex justify-center items-center lg:justify-between">
@@ -106,12 +106,12 @@
                 <h2 class="text-5xl">{{ section.settings.title }}</h2>
             {% endif %}
             {% if section.settings.collection_link %}
-                <a href="{{ collections[section.settings.collection].url }}" class="text-lg underline hidden lg:block">View all {{ collection_title }} </a>
+                <a href="{{ collections[section.settings.collection].url }}" class="text-lg items-center gap-2 hidden no-underline lg:flex"><span class="block">View all {{ collection_title }}</span> <img src="{{ 'arrow-narrow-right.png' |  asset_url }}" alt="Right facing arrow" class="w-5 h-5"/></a>
             {% endif %}
         </div>
         <div class="m-auto flex justify-end">
             <div class="products w-full grid grid-cols-2 py-9 lg:flex gap-6 lg:overflow-x-auto">
-                {{ collection }}
+                {{ collection }} {% comment %} line 25 | captured: "collection" {% endcomment %}
             </div>
         </div>
         <button class="show-more w-full bg-black text-white text-base p-4 text-center rounded-full lg:hidden" role="button" aria-label="Show more">Show More</button>
