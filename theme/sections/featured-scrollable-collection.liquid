@@ -3,6 +3,18 @@
     assign collection_products = collections[section.settings.collection].products
     assign collection_title = collections[section.settings.collection].title
 %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const products = Array.from(document.querySelectorAll('#scrollable-collection .product'));
+        const showMore = document.querySelector('#scrollable-collection .show-more');
+        
+        showMore.addEventListener('click', () => {
+            products.slice(4).forEach(product => {
+                product.classList.add('active')     
+            });
+        });
+    });
+</script>
 
 {%  capture collection %} 
     {% for product in collection_products %}
@@ -58,6 +70,7 @@
                 {{ collection }}
             </div>
         </div>
+        <button class="show-more w-full bg-black text-white text-base p-4 text-center rounded-full lg:hidden" role="button" aria-label="Show more">Show More</button>
     </div>
 </section>
 
