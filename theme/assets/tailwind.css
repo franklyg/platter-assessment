@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
+#scrollable-collection h2{
+    font-family: "Source Serif 4", serif;
+}
+#scrollable-collection h3{
+    font-family: "Bebas Neue", sans-serif;
+}
+#scrollable-collection p,
+#scrollable-collection button{
+    font-family: "Poppins", serif;
+}
+
 @layer utilities {
+    
     #scrollable-collection .products {
-        /* For Firefox */
         scrollbar-width: thin;
         scrollbar-color: #000 #DDD6D7;
     }
@@ -10,28 +21,28 @@
     #scrollable-collection .products::-webkit-scrollbar {
         width: 8px;
         height: 4px;
+        transition: height 0.2s ease; /* Smooth transition */
+    }
+    
+    #scrollable-collection .products:hover::-webkit-scrollbar {
+        height: 6px;
     }
     
     #scrollable-collection .products::-webkit-scrollbar-thumb {
         background-color: #000;
         border-radius: 4px;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.2s ease, height 0.2s ease; /* Smooth transition */
     }
     
     #scrollable-collection .products::-webkit-scrollbar-thumb:hover {
-        background: #DDD6D7;
+        background-color: #DDD6D7;
     }
+    
     #scrollable-collection .products::-webkit-scrollbar-track {
         background: #DDD6D7;
         border-radius: 4px;
     }
     
-    #scrollable-collection .product:nth-child(n+5) {
-      display: none;
-    }
-    #scrollable-collection .product.active {
-      display: block;
-    }
     
     @media (min-width: 1024px) {
         #scrollable-collection .products{
@@ -41,5 +52,16 @@
         #scrollable-collection .product:nth-child(n+5) {
             display: block;
        }
+    }
+    
+    @media (max-width: 1024px) {
+        .dropdown-products {
+            overflow: hidden;
+            max-height: 0;
+            transition: all 1.5s ease;
+        }
+        .dropdown-products.active{
+            max-height: 10000px;
+        }
     }
   }

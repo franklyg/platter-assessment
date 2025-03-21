@@ -7,7 +7,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-red-500: oklch(0.637 0.237 25.331);
-    --color-green-800: oklch(0.448 0.119 151.328);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -262,6 +261,9 @@
   }
   .col-span-1 {
     grid-column: span 1 / span 1;
+  }
+  .col-span-2 {
+    grid-column: span 2 / span 2;
   }
   .col-span-full {
     grid-column: 1 / -1;
@@ -1088,11 +1090,17 @@
     --tw-border-style: solid;
     border-style: solid;
   }
+  .border-black {
+    border-color: var(--color-black);
+  }
   .bg-\(--my_variable\) {
     background-color: var(--my_variable);
   }
   .bg-\(color\:--my-color\) {
     background-color: var(--my-color);
+  }
+  .bg-\[\#5C7962\] {
+    background-color: #5C7962;
   }
   .bg-\[\#0088cc\] {
     background-color: #0088cc;
@@ -1105,9 +1113,6 @@
   }
   .bg-black {
     background-color: var(--color-black);
-  }
-  .bg-green-800 {
-    background-color: var(--color-green-800);
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
@@ -1287,9 +1292,6 @@
   .object-top {
     object-position: top;
   }
-  .p-2 {
-    padding: calc(var(--spacing) * 2);
-  }
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
@@ -1302,6 +1304,9 @@
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
   }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
   .py-9 {
     padding-block: calc(var(--spacing) * 9);
   }
@@ -1311,8 +1316,14 @@
   .pt-\[100\%\] {
     padding-top: 100%;
   }
+  .pr-6 {
+    padding-right: calc(var(--spacing) * 6);
+  }
   .pb-28 {
     padding-bottom: calc(var(--spacing) * 28);
+  }
+  .pl-2 {
+    padding-left: calc(var(--spacing) * 2);
   }
   .text-center {
     text-align: center;
@@ -1965,6 +1976,15 @@
     }
   }
 }
+#scrollable-collection h2 {
+  font-family: "Source Serif 4", serif;
+}
+#scrollable-collection h3 {
+  font-family: "Bebas Neue", sans-serif;
+}
+#scrollable-collection p, #scrollable-collection button {
+  font-family: "Poppins", serif;
+}
 @layer utilities {
   #scrollable-collection .products {
     scrollbar-width: thin;
@@ -1973,24 +1993,22 @@
   #scrollable-collection .products::-webkit-scrollbar {
     width: 8px;
     height: 4px;
+    transition: height 0.2s ease;
+  }
+  #scrollable-collection .products:hover::-webkit-scrollbar {
+    height: 6px;
   }
   #scrollable-collection .products::-webkit-scrollbar-thumb {
     background-color: #000;
     border-radius: 4px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, height 0.2s ease;
   }
   #scrollable-collection .products::-webkit-scrollbar-thumb:hover {
-    background: #DDD6D7;
+    background-color: #DDD6D7;
   }
   #scrollable-collection .products::-webkit-scrollbar-track {
     background: #DDD6D7;
     border-radius: 4px;
-  }
-  #scrollable-collection .product:nth-child(n+5) {
-    display: none;
-  }
-  #scrollable-collection .product.active {
-    display: block;
   }
   @media (min-width: 1024px) {
     #scrollable-collection .products {
@@ -1998,6 +2016,16 @@
     }
     #scrollable-collection .product, #scrollable-collection .product:nth-child(n+5) {
       display: block;
+    }
+  }
+  @media (max-width: 1024px) {
+    .dropdown-products {
+      overflow: hidden;
+      max-height: 0;
+      transition: all 1.5s ease;
+    }
+    .dropdown-products.active {
+      max-height: 10000px;
     }
   }
 }
