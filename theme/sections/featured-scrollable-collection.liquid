@@ -28,8 +28,8 @@
         <a href="{{ product.url }}" class="product lg:block col-span-1 lg:min-w-[355px]">
             <div class="product-image w-full relative mb-4">
                 <div class="relative pt-[100%] lg:pt-0 lg:h-[355px] rounded-xl overflow-hidden group">                    
-                    {{ product.featured_image | image_url: width: 355 | image_tag: class: 'image-main w-full h-full absolute object-cover object-center top-0 left-0 z-20 transition-opacity duration-300 group-hover:opacity-0', loading: 'lazy', alt: product.title }}
-                    {{ product.images[1] | image_url: width: 355 | image_tag: class: 'image-hover w-full h-full absolute object-cover object-center top-0 left-0 z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100', loading: 'lazy', alt: product.title }}
+                    {{ product.featured_image | image_url: width: '1024x' | image_tag: class: 'image-main w-full h-full absolute object-cover object-center top-0 left-0 z-20 transition-opacity duration-300 group-hover:opacity-0', loading: 'lazy', alt: product.title }}
+                    {{ product.images[1] | image_url: width: '1024x' | image_tag: class: 'image-hover w-full h-full absolute object-cover object-center top-0 left-0 z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100', loading: 'lazy', alt: product.title }}
                 </div>
                 <div class="absolute top-0 left-0 py-2 pl-2 pr-6 text-[10px] z-20 flex justify-between w-full">
                     {% if product.tags contains 'Best seller' %}
